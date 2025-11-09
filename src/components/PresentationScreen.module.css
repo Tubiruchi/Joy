@@ -1,0 +1,238 @@
+/* definición de colores y tamaños base */
+:root{
+  --bg:#eaf3f5;
+  --panel:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --brand:#0a63d9;
+  --band: transparent;
+  --radius-xl:24px;
+  --radius-lg:16px;
+}
+
+/* ajustes generales para todos los elementos y el html/body */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  min-height: 100vh;
+}
+
+/* estilo para la página completa de autenticación */
+.authPage {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* contenedor principal dentro de la página */
+.shell{
+  max-width:1400px;
+  margin: 0 auto;
+  padding:0;
+  display:grid;
+  grid-template-columns: 1.2fr 1fr; /* dos columnas */
+  gap:60px;
+  align-items:center;
+  width: 100%;
+}
+
+/* estilos para la imagen decorativa de la izquierda */
+.art{
+  border-radius: var(--radius-xl);
+  overflow:hidden;
+  background: #6ecf5d;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  position:relative;
+  height:540px;
+}
+.band{ /* contenedor interno de la imagen */
+  position:relative;
+  width:100%;
+  height:100%;
+  background: var(--band);
+  border-radius: var(--radius-xl);
+}
+.band .sun{ /* imagen del sol (si hubiera) */
+  position:absolute; left:24px; top:24px; width:100px;
+}
+.band .mountains{ /* imagen de las montañas */
+  position:absolute; left:20px; bottom:0; width:450px;
+}
+
+/* ajustes para pantallas medianas y pequeñas */
+@media (max-width: 1024px){
+  .shell{
+    grid-template-columns: 1fr; /* una sola columna */
+  }
+  .art { display: none; } /* ocultar imagen */
+}
+@media (max-width: 960px){ /* ajustes menores de imagen */
+  .band .mountains{ width:300px; left:10px }
+  .band .sun{ width:80px; left:12px }
+}
+
+/* estilos para la tarjeta del formulario */
+.formCard{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: 48px 40px 60px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  max-width:600px;
+  text-align: center;
+}
+
+/* título principal (h1) */
+h1{
+  font-size: clamp(38px, 5vw, 48px);
+  line-height:1.1;
+  margin: 0 0 16px;
+  letter-spacing:.5px;
+  font-weight: 800;
+}
+
+/* etiquetas de los campos */
+.label{
+  display:block;
+  color:var(--text);
+  opacity:.9;
+  margin: 16px 0 8px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* campos de texto */
+.input{
+  width:100%;
+  padding:14px 20px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius: var(--radius-lg);
+  outline:none;
+  font-size: 16px;
+  font-family: inherit;
+  color:var(--text);
+  margin-bottom:12px;
+}
+.input:focus{ /* al hacer clic en el campo */
+    border-color: var(--brand);
+}
+.input::placeholder{ color:var(--muted); opacity:1; } /* texto de ayuda */
+
+/* estilo para el checkbox */
+.check{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin: 12px 0 0;
+  font-size: 14px;
+  color:var(--muted);
+  justify-content: flex-start;
+}
+.check input{ /* caja del checkbox */
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  background:#fff;
+  border:1.5px solid var(--line);
+  position:relative;
+  flex-shrink: 0;
+}
+.check input:checked{ /* cuando está marcado */
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.check input:checked::after{ /* palomita/check */
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M9.55 17.54L4.8 12.8l1.4-1.4l3.35 3.34l7.13-7.13l1.4 1.41z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* botón principal */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  margin-top:20px;
+  padding:16px 22px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight:700;
+  color:#ffffff;
+  background:var(--brand);
+  border:none;
+  border-radius:var(--radius-xl);
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+}
+.btn:hover{ /* al pasar el mouse */
+    background: #0953c0;
+}
+.btn:active{ transform: translateY(2px) } /* al hacer clic */
+.btn:focus-visible{ /* al seleccionar con teclado */
+  outline:3px solid rgba(10,99,217,.4);
+  outline-offset:2px;
+}
+
+/* enlace secundario (para ir a login/registro) */
+.formLink {
+    margin-top: 20px;
+    font-size: 15px;
+    color: var(--muted);
+}
+.formLink span { /* parte clickeable */
+    color: var(--brand);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+.formLink span:hover { /* al pasar el mouse */
+    color: #0953c0;
+}
+
+/* contenedor para los botones en la pantalla de presentación */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+}
+.actions .btn { /* quitar margen extra a los botones dentro de 'actions' */
+    margin-top: 0;
+}
+
+/* sección inferior (logo?) */
+.snow{
+  display:flex; justify-content:center; align-items:center;
+  margin:34px 0 0;
+}
+.snow .logo{
+  width:min(280px, 40vw);
+  height:auto; display:block;
+}
+
+/* ajustes para pantallas muy pequeñas */
+@media (max-width: 600px){
+  .band{ height: 220px }
+  .formCard{ padding: 36px 20px 48px; max-width:100% }
+}
